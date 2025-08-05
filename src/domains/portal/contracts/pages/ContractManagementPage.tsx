@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { ContractTable } from '../components/ContractTable'
 import { type Contract, type ContractFilters } from '../apis/contractsApi'
@@ -6,12 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../../../components
 import { Button } from '../../../../components/ui/button'
 import { Badge } from '../../../../components/ui/badge'
 import { 
-  DocumentTextIcon,
-  CurrencyDollarIcon,
-  ExclamationTriangleIcon,
-  CheckCircleIcon,
-  ClockIcon,
-  ArrowLeftIcon
+  ArrowLeftIcon,
+  ExclamationTriangleIcon
 } from '@heroicons/react/24/outline'
 
 type ViewMode = 'list' | 'details'

@@ -88,8 +88,7 @@ export const UserDetails = ({ userId, onClose, onEdit, onDelete }: UserDetailsPr
     switch (role) {
       case 'admin': return 'destructive'
       case 'helper': return 'default'
-      case 'client': return 'secondary'
-      case 'provider': return 'default'
+      case 'seeker': return 'secondary'
       default: return 'secondary'
     }
   }

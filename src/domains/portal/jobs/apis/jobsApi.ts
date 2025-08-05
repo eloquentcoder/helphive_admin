@@ -159,7 +159,7 @@ export const jobsApi = createApi({
     // Get single job details
     getJob: builder.query<Job, string>({
       query: (id) => `/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Job', id }],
+      providesTags: (_, __, id) => [{ type: 'Job', id }],
     }),
 
     // Get job applications
@@ -174,7 +174,7 @@ export const jobsApi = createApi({
         url: `/${jobId}/applications`,
         params: { page, limit },
       }),
-      providesTags: (result, error, { jobId }) => [
+      providesTags: (_, __, { jobId }) => [
         { type: 'JobApplication', id: jobId },
       ],
     }),
@@ -237,7 +237,7 @@ export const jobsApi = createApi({
         method: 'PATCH',
         body: { status, reason },
       }),
-      invalidatesTags: (result, error, { id }) => [
+      invalidatesTags: (_, __, { id }) => [
         { type: 'Job', id },
         'Job',
         'JobAnalytics',
@@ -259,7 +259,7 @@ export const jobsApi = createApi({
         method: 'PATCH',
         body: { status, reason, adminNote },
       }),
-      invalidatesTags: (result, error, { applicationId }) => [
+      invalidatesTags: (_, __, { applicationId }) => [
         { type: 'JobApplication', id: applicationId },
         'JobApplication',
       ],
@@ -280,7 +280,7 @@ export const jobsApi = createApi({
         method: 'PATCH',
         body: { status, reason, adminNote },
       }),
-      invalidatesTags: (result, error, { contractId }) => [
+      invalidatesTags: (_, __, { contractId }) => [
         { type: 'JobContract', id: contractId },
         'JobContract',
         'JobAnalytics',
@@ -302,7 +302,7 @@ export const jobsApi = createApi({
         method: 'POST',
         body,
       }),
-      invalidatesTags: (result, error, { contractId }) => [
+      invalidatesTags: (_, __, { contractId }) => [
         { type: 'JobContract', id: contractId },
         'JobContract',
         'JobAnalytics',

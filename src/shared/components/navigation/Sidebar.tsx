@@ -14,7 +14,6 @@ import {
   ChartBarIcon,
   ShieldCheckIcon,
   ExclamationTriangleIcon,
-  BellIcon,
   ChevronRightIcon,
   CheckIcon,
   PauseIcon,
@@ -157,7 +156,7 @@ const getNavigation = (analytics?: any): NavigationItem[] => [
   },
 ]
 
-export const Sidebar = ({ open, collapsed, onClose, onToggleCollapse }: SidebarProps) => {
+export const Sidebar = ({ open, collapsed, onClose }: SidebarProps) => {
   const location = useLocation()
   const user = useSelector(selectCurrentUser)
   const { data: analytics } = useGetUserAnalyticsQuery()

@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { JobTable } from '../components/JobTable'
 import { JobDetails } from '../components/JobDetails'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -15,10 +14,7 @@ import {
   XCircleIcon,
   UsersIcon,
   CheckCircleIcon,
-  TrendingUpIcon,
-  ChartBarIcon,
-  EyeIcon,
-  DocumentTextIcon
+  ChartBarIcon
 } from '@heroicons/react/24/outline'
 import { type Job, useGetJobAnalyticsQuery } from '../apis/jobsApi'
 
@@ -28,48 +24,37 @@ export const JobManagementPage = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('list')
   const [selectedJob, setSelectedJob] = useState<Job | null>(null)
   const [activeTab, setActiveTab] = useState('all')
-  const location = useLocation()
+  // const location = useLocation()
   
   const { data: analytics, isLoading: analyticsLoading } = useGetJobAnalyticsQuery()
   
   // Extract the sub-route from the path
-  const pathSegments = location.pathname.split('/')
-  const subRoute = pathSegments[2] || 'all'
+  // const pathSegments = location.pathname.split('/')
+  // const subRoute = pathSegments[2] || 'all'
   
   // Map sub-routes to filter configurations
-  const getFilterConfig = () => {
-    switch (subRoute) {
-      case 'pending':
-        return { status: ['draft'], title: 'Pending Jobs' }
-      case 'active':
-        return { status: ['published'], title: 'Active Jobs' }
-      case 'paused':
-        return { status: ['paused'], title: 'Paused Jobs' }
-      case 'expired':
-        return { status: ['expired', 'stopped'], title: 'Expired Jobs' }
-      case 'applications':
-        return { title: 'Job Applications' }
-      case 'contracts':
-        return { title: 'Job Contracts' }
-      default:
-        return { title: 'All Jobs' }
-    }
-  }
+  // const getFilterConfig = () => {
+  //   switch (subRoute) {
+  //     case 'pending':
+  //       return { status: ['draft'], title: 'Pending Jobs' }
+  //     case 'active':
+  //       return { status: ['published'], title: 'Active Jobs' }
+  //     case 'paused':
+  //       return { status: ['paused'], title: 'Paused Jobs' }
+  //     case 'expired':
+  //       return { status: ['expired', 'stopped'], title: 'Expired Jobs' }
+  //     case 'applications':
+  //       return { title: 'Job Applications' }
+  //     case 'contracts':
+  //       return { title: 'Job Contracts' }
+  //     default:
+  //       return { title: 'All Jobs' }
+  //   }
+  // }
   
-  const filterConfig = getFilterConfig()
+  // const filterConfig = getFilterConfig()
 
   // Animation variants
-  const pageVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-    exit: { opacity: 0, y: -20, transition: { duration: 0.3 } }
-  }
-
-  const cardVariants = {
-    initial: { opacity: 0, scale: 0.95 },
-    animate: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: "easeOut" } },
-    hover: { y: -2, transition: { duration: 0.2 } }
-  }
 
   const statsCards = [
     {
@@ -152,10 +137,9 @@ export const JobManagementPage = () => {
         return (
           <motion.div
             key={stat.title}
-            variants={cardVariants}
-            initial="initial"
-            animate="animate"
-            whileHover="hover"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            whileHover={{ y: -2 }}
             style={{ animationDelay: `${index * 0.1}s` }}
           >
             <Card className="relative overflow-hidden border-0 shadow-sm hover:shadow-lg transition-all duration-300">
@@ -172,7 +156,7 @@ export const JobManagementPage = () => {
                       )}
                     </p>
                     <div className="flex items-center space-x-1">
-                      <TrendingUpIcon className="h-4 w-4 text-green-500" />
+                      <ChartBarIcon className="h-4 w-4 text-green-500" />
                       <span className="text-sm font-medium text-green-600">{stat.change}</span>
                       <span className="text-sm text-gray-500">from last month</span>
                     </div>
@@ -194,10 +178,9 @@ export const JobManagementPage = () => {
       case 'list':
         return (
           <motion.div
-            variants={pageVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
             className="space-y-6"
           >
             {/* Header Section */}
@@ -241,7 +224,7 @@ export const JobManagementPage = () => {
                     >
                       <ClockIcon className="h-4 w-4 mr-2" />
                       Pending
-                      {analytics?.draftJobs > 0 && (
+                      {analytics?.draftJobs && analytics.draftJobs > 0 && (
                         <Badge className="ml-2 h-5 w-5 p-0 text-xs bg-orange-500">
                           {analytics.draftJobs}
                         </Badge>

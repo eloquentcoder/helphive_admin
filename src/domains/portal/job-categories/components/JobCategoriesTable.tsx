@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { 
   type JobCategory, 
   type JobCategoryFilters,
@@ -19,7 +19,6 @@ import {
   TableRow 
 } from '../../../../components/ui/table'
 import { Card, CardContent, CardHeader, CardTitle } from '../../../../components/ui/card'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../../../../components/ui/dialog'
 import {
   PencilIcon,
   TrashIcon,
@@ -28,7 +27,6 @@ import {
   EyeIcon,
   TagIcon,
   FolderIcon,
-  FolderOpenIcon
 } from '@heroicons/react/24/outline'
 
 interface JobCategoriesTableProps {
@@ -50,9 +48,6 @@ export function JobCategoriesTable({
     ...defaultFilters
   })
   
-  const [selectedCategory, setSelectedCategory] = useState<JobCategory | null>(null)
-  const [showCreateDialog, setShowCreateDialog] = useState(false)
-  const [showEditDialog, setShowEditDialog] = useState(false)
 
   const { data, isLoading, error } = useGetJobCategoriesQuery(filters)
   const [deleteCategory, { isLoading: isDeleting }] = useDeleteJobCategoryMutation()
@@ -60,7 +55,7 @@ export function JobCategoriesTable({
 
   // Update filters when defaultFilters change (e.g., route change)
   useEffect(() => {
-    setFilters(prev => ({
+    setFilters(() => ({
       page: 1,
       limit: 20,
       sortBy: 'sortOrder',
@@ -105,16 +100,16 @@ export function JobCategoriesTable({
   }
 
   const handleEdit = (category: JobCategory) => {
-    setSelectedCategory(category)
-    setShowEditDialog(true)
+    // TODO: Implement edit functionality
+    console.log('Edit category:', category)
   }
 
   const handleView = (category: JobCategory) => {
     if (onCategorySelect) {
       onCategorySelect(category)
     } else {
-      setSelectedCategory(category)
       // Could show details modal here
+      console.log('View category:', category)
     }
   }
 
@@ -154,7 +149,7 @@ export function JobCategoriesTable({
             <span>Job Categories</span>
             {showCreateButton && (
               <Button 
-                onClick={() => setShowCreateDialog(true)}
+                onClick={() => console.log('Create category clicked')}
                 className="flex items-center gap-2"
               >
                 <PlusIcon className="h-4 w-4" />

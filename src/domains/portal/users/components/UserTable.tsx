@@ -3,7 +3,6 @@ import {
   ChevronDownIcon, 
   MagnifyingGlassIcon,
   FunnelIcon,
-  EllipsisVerticalIcon,
   CheckIcon,
   XMarkIcon,
   ExclamationTriangleIcon,
@@ -19,7 +18,6 @@ import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { useGetUsersQuery, useUpdateUserStatusMutation, useUpdateUserVerificationMutation, useBulkUpdateUsersMutation, type User, type UsersFilter } from '../apis/usersApi'
 
 interface UserTableProps {

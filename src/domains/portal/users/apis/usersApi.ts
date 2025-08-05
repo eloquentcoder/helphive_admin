@@ -116,7 +116,7 @@ export const usersApi = createApi({
     // Get single user details
     getUser: builder.query<User, string>({
       query: (id) => `/${id}`,
-      providesTags: (result, error, id) => [{ type: 'User', id }],
+      providesTags: (_, __, id) => [{ type: 'User', id }],
     }),
 
     // Get user analytics
@@ -132,7 +132,7 @@ export const usersApi = createApi({
         method: 'PATCH',
         body: { status, reason },
       }),
-      invalidatesTags: (result, error, { id }) => [
+      invalidatesTags: (_, __, { id }) => [
         { type: 'User', id },
         'User',
         'UserAnalytics',
@@ -146,7 +146,7 @@ export const usersApi = createApi({
         method: 'PATCH',
         body: { verified },
       }),
-      invalidatesTags: (result, error, { id }) => [
+      invalidatesTags: (_, __, { id }) => [
         { type: 'User', id },
         'User',
         'UserAnalytics',
@@ -170,7 +170,7 @@ export const usersApi = createApi({
         method: 'PUT',
         body: userData,
       }),
-      invalidatesTags: (result, error, { id }) => [
+      invalidatesTags: (_, __, { id }) => [
         { type: 'User', id },
         'User',
         'UserAnalytics',
@@ -184,7 +184,7 @@ export const usersApi = createApi({
         method: 'PATCH',
         body: { role },
       }),
-      invalidatesTags: (result, error, { id }) => [
+      invalidatesTags: (_, __, { id }) => [
         { type: 'User', id },
         'User',
         'UserAnalytics',
@@ -247,7 +247,7 @@ export const usersApi = createApi({
         method: 'PATCH',
         body: { approved, reason },
       }),
-      invalidatesTags: (result, error, { userId }) => [{ type: 'User', id: userId }],
+      invalidatesTags: (_, __, { userId }) => [{ type: 'User', id: userId }],
     }),
   }),
 })

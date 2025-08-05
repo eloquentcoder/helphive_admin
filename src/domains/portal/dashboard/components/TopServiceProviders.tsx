@@ -5,7 +5,6 @@ import {
   StarIcon,
   CurrencyDollarIcon,
   UsersIcon,
-  TrophyIcon,
   EyeIcon,
   ChevronUpIcon,
   ChevronDownIcon,

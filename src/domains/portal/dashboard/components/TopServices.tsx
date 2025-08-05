@@ -186,7 +186,7 @@ export const TopServices = ({ services = [] }: TopServicesProps) => {
 
   const displayedServices = showAll ? sortedServices : sortedServices.slice(0, 6)
 
-  const getTrendIcon = (trend: string, growth: number) => {
+  const getTrendIcon = (growth: number) => {
     if (growth > 0) {
       return <ArrowUpCircleIcon className="w-3 h-3 text-green-500" />
     } else if (growth < 0) {
@@ -315,7 +315,7 @@ export const TopServices = ({ services = [] }: TopServicesProps) => {
                       </span>
                     </div>
                     <div className="flex items-center space-x-1">
-                      {getTrendIcon(service.trend, service.growth)}
+                      {getTrendIcon(service.growth)}
                       <span className={cn(
                         "font-medium",
                         service.growth > 0 ? "text-green-600 dark:text-green-400" : 

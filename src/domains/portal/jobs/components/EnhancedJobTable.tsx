@@ -10,7 +10,6 @@ import {
   StopIcon,
   TrashIcon,
   EllipsisVerticalIcon,
-  CalendarIcon,
   CurrencyDollarIcon,
   UserGroupIcon,
   CheckCircleIcon,
@@ -58,42 +57,6 @@ export const JobTable = ({ onJobSelect, onJobEdit, onJobDelete, defaultFilters }
   const [updateJobStatus] = useUpdateJobStatusMutation()
   const [bulkUpdateJobs] = useBulkUpdateJobsMutation()
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  }
-
-  const rowVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.3, ease: "easeOut" }
-    },
-    hover: {
-      y: -2,
-      boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-      transition: { duration: 0.2 }
-    }
-  }
-
-  const loadingVariants = {
-    animate: {
-      scale: [1, 1.05, 1],
-      opacity: [0.5, 0.8, 0.5],
-      transition: {
-        duration: 1.5,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  }
 
   const handleSearch = (search: string) => {
     setFilters(prev => ({ ...prev, search, page: 1 }))
@@ -190,13 +153,13 @@ export const JobTable = ({ onJobSelect, onJobEdit, onJobDelete, defaultFilters }
 
   if (isLoading) {
     return (
-      <motion.div variants={containerVariants} initial="hidden" animate="visible">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
         <Card className="border-0 shadow-sm">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <motion.div
-                variants={loadingVariants}
-                animate="animate"
+                animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
                 className="h-6 w-6 bg-blue-500 rounded"
               />
               Loading Jobs...
@@ -207,9 +170,8 @@ export const JobTable = ({ onJobSelect, onJobEdit, onJobDelete, defaultFilters }
               {[...Array(8)].map((_, i) => (
                 <motion.div
                   key={i}
-                  variants={loadingVariants}
-                  animate="animate"
-                  style={{ animationDelay: `${i * 0.1}s` }}
+                  animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
+                  transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.1 }}
                   className="h-20 bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 rounded-lg"
                 />
               ))}
@@ -254,14 +216,13 @@ export const JobTable = ({ onJobSelect, onJobEdit, onJobDelete, defaultFilters }
 
   return (
     <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       className="space-y-6"
     >
       {/* Search and Filters */}
       <motion.div 
-        variants={rowVariants}
+        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
         className="flex flex-col sm:flex-row gap-4"
       >
         <div className="flex-1 relative group">
@@ -322,7 +283,7 @@ export const JobTable = ({ onJobSelect, onJobEdit, onJobDelete, defaultFilters }
                     </SelectContent>
                   </Select>
 
-                  <Select value={filters.category || 'all'} onValueChange={(value) => handleFilterChange('category', value === 'all' ? undefined : [value])}>
+                  <Select value={Array.isArray(filters.category) ? filters.category[0] || 'all' : filters.category || 'all'} onValueChange={(value) => handleFilterChange('category', value === 'all' ? undefined : [value])}>
                     <SelectTrigger className="border-gray-200 focus:border-blue-500">
                       <SelectValue placeholder="Filter by category" />
                     </SelectTrigger>
@@ -447,10 +408,9 @@ export const JobTable = ({ onJobSelect, onJobEdit, onJobDelete, defaultFilters }
                     return (
                       <motion.div
                         key={job.id}
-                        variants={rowVariants}
-                        initial="hidden"
-                        animate="visible"
-                        whileHover="hover"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        whileHover={{ y: -2 }}
                         style={{ animationDelay: `${index * 0.05}s` }}
                         className="grid grid-cols-12 gap-4 p-4 cursor-pointer hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-indigo-50/50 transition-all duration-200 group"
                         onClick={() => onJobSelect?.(job)}
@@ -632,7 +592,7 @@ export const JobTable = ({ onJobSelect, onJobEdit, onJobDelete, defaultFilters }
           {/* Pagination */}
           {totalCount > 0 && (
             <motion.div 
-              variants={rowVariants}
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
               className="flex items-center justify-between p-6 border-t bg-gradient-to-r from-gray-50 to-white"
             >
               <div className="text-sm text-gray-700">

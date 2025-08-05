@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { ApplicationTable } from '../components/ApplicationTable'
 import { type Application, type ApplicationFilters, useGetApplicationQuery } from '../apis/applicationsApi'
@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../../../components
 import { Button } from '../../../../components/ui/button'
 import { Badge } from '../../../../components/ui/badge'
 import { 
-  DocumentTextIcon,
   UserIcon,
   ClockIcon,
   StarIcon,

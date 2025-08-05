@@ -18,10 +18,8 @@ import {
   ArrowLeftIcon,
   PaperAirplaneIcon,
   UserGroupIcon,
-  ClockIcon,
   ChatBubbleLeftRightIcon,
-  DocumentTextIcon,
-  ExclamationCircleIcon
+  DocumentTextIcon
 } from '@heroicons/react/24/outline'
 
 type ViewMode = 'list' | 'details'

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { 
   useGetConversationsQuery,
   type Conversation,
@@ -22,11 +22,8 @@ import {
   ChevronRightIcon,
   MagnifyingGlassIcon,
   FunnelIcon,
-  EyeIcon,
   ChatBubbleLeftRightIcon,
-  UserGroupIcon,
-  ClockIcon,
-  ExclamationCircleIcon
+  ClockIcon
 } from '@heroicons/react/24/outline'
 
 interface ConversationsTableProps {
@@ -50,7 +47,7 @@ export function ConversationsTable({
 
   // Update filters when defaultFilters change (e.g., route change)
   useEffect(() => {
-    setFilters(prev => ({
+    setFilters(() => ({
       page: 1,
       limit: 20,
       sortBy: 'lastMessageAt',

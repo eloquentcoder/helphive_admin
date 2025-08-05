@@ -1,8 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { 
   useGetContractsQuery, 
-  useUpdateContractStatusMutation,
-  useUpdatePaymentStatusMutation,
   useBulkUpdateContractsMutation,
   type Contract,
   type ContractFilters 
@@ -52,8 +50,6 @@ export function ContractTable({ defaultFilters = {}, onContractSelect }: Contrac
   const [showFilters, setShowFilters] = useState(false)
 
   const { data: contractsData, isLoading, error } = useGetContractsQuery(filters)
-  const [updateStatus] = useUpdateContractStatusMutation()
-  const [updatePayment] = useUpdatePaymentStatusMutation()
   const [bulkUpdate] = useBulkUpdateContractsMutation()
 
   const contracts = contractsData?.contracts || []

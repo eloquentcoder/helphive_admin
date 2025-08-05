@@ -130,7 +130,7 @@ export const jobCategoriesApi = createApi({
     // Get single job category
     getJobCategory: builder.query<JobCategory, string>({
       query: (id) => `/${id}`,
-      providesTags: (result, error, id) => [{ type: 'JobCategory', id }],
+      providesTags: (_, __, id) => [{ type: 'JobCategory', id }],
     }),
 
     // Create new job category
@@ -154,7 +154,7 @@ export const jobCategoriesApi = createApi({
         method: 'PUT',
         body,
       }),
-      invalidatesTags: (result, error, { id }) => [
+      invalidatesTags: (_, __, { id }) => [
         { type: 'JobCategory', id },
         { type: 'JobCategory', id: 'LIST' },
         'CategoryAnalytics',
@@ -168,7 +168,7 @@ export const jobCategoriesApi = createApi({
         url: `/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, id) => [
+      invalidatesTags: (_, __, id) => [
         { type: 'JobCategory', id },
         { type: 'JobCategory', id: 'LIST' },
         'CategoryAnalytics',

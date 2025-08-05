@@ -10,12 +10,7 @@ import {
   CurrencyDollarIcon,
   UserGroupIcon,
   EyeIcon,
-  MapPinIcon,
-  ClockIcon,
-  DocumentTextIcon,
-  HomeIcon,
-  CheckCircleIcon,
-  XCircleIcon
+  MapPinIcon
 } from '@heroicons/react/24/outline'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
 import { JobCategoriesTable } from '../components/JobCategoriesTable'
 import { 
@@ -8,16 +8,13 @@ import {
   useGetCategoryHierarchyQuery
 } from '../apis/jobCategoriesApi'
 import { Card, CardContent, CardHeader, CardTitle } from '../../../../components/ui/card'
-import { Button } from '../../../../components/ui/button'
 import { Badge } from '../../../../components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../../components/ui/tabs'
 import {
   FolderIcon,
   TagIcon,
   ChartBarIcon,
-  EyeIcon,
   CheckCircleIcon,
-  XCircleIcon,
   CubeIcon,
 } from '@heroicons/react/24/outline'
 import { TreePine } from 'lucide-react'
@@ -26,7 +23,7 @@ type ViewMode = 'table' | 'hierarchy' | 'analytics'
 
 export function JobCategoryManagementPage() {
   const location = useLocation()
-  const [selectedCategory, setSelectedCategory] = useState<JobCategory | null>(null)
+  // const [selectedCategory, setSelectedCategory] = useState<JobCategory | null>(null)
   const [activeTab, setActiveTab] = useState<ViewMode>('table')
 
   const { data: analytics } = useGetCategoryAnalyticsQuery()
@@ -73,7 +70,7 @@ export function JobCategoryManagementPage() {
   }
 
   const handleCategorySelect = (category: JobCategory) => {
-    setSelectedCategory(category)
+    console.log('Selected category:', category)
   }
 
   const StatCard = ({ 
