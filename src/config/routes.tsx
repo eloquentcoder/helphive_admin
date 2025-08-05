@@ -14,7 +14,7 @@ import { JobCategoryManagementPage } from "../domains/portal/job-categories/page
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navigate to="/dashboard" replace />,
+    element: <Navigate to="/auth/login" replace />,
   },
   {
     path: "/auth",
